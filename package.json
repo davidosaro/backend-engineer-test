@@ -1,0 +1,44 @@
+{
+  "name": "backend-engineer-test",
+  "version": "1.0.0",
+  "description": "Build a simple RESTful API to create and manage products in a store",
+  "main": "index.js",
+  "scripts": {
+    "start-server:dev": "nodemon --ext ts --exec ts-node src/index.ts",
+    "dev": "npm-run-all -s start-server:dev",
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "David Osaro",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/chalk": "^2.2.4",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.1",
+    "@types/mongoose": "^5.11.97",
+    "@types/node": "^22.13.14",
+    "@types/winston": "^2.4.4",
+    "@typescript-eslint/eslint-plugin": "^8.28.0",
+    "@typescript-eslint/parser": "^8.28.0",
+    "eslint": "^9.23.0",
+    "eslint-config-prettier": "^10.1.1",
+    "eslint-plugin-prettier": "^5.2.5",
+    "globals": "^16.0.0",
+    "nodemon": "^3.1.9",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^3.5.3",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.2",
+    "typescript-eslint": "^8.28.0"
+  },
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "helmet": "^8.1.0",
+    "mongoose": "^8.13.0",
+    "winston": "^3.17.0"
+  }
+}
