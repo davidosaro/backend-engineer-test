@@ -1,10 +1,14 @@
 import { Response } from "express";
 import { IResponseData } from "./interfaces";
+import AppError from "./errors/app-error";
+import { RESPONSE_MESSAGES, HttpStatus } from "./constants";
 
-export const errorResponse = (res: Response, statusCode: number, message: String) => {
-  return res.status(statusCode).json({
+export const errorResponse = (res: Response, err: Partial<AppError>) => {
+  let errorMessage = err.message || RESPONSE_MESSAGES.INTERNAL_SERVER_ERROR;
+  let errorStatusCode = err?.statusCode || HttpStatus.INTERNAL_SERVER_ERROR;
+  return res.status(errorStatusCode).json({
     status: "error",
-    error: message,
+    error: errorMessage,
   });
 };
 
