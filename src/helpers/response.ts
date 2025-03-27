@@ -4,8 +4,8 @@ import AppError from "./errors/app-error";
 import { RESPONSE_MESSAGES, HttpStatus } from "./constants";
 
 export const errorResponse = (res: Response, err: Partial<AppError>) => {
-  let errorMessage = err.message || RESPONSE_MESSAGES.INTERNAL_SERVER_ERROR;
-  let errorStatusCode = err?.statusCode || HttpStatus.INTERNAL_SERVER_ERROR;
+  const errorMessage = err.message || RESPONSE_MESSAGES.INTERNAL_SERVER_ERROR;
+  const errorStatusCode = err?.statusCode || HttpStatus.INTERNAL_SERVER_ERROR;
   return res.status(errorStatusCode).json({
     status: "error",
     error: errorMessage,
@@ -17,6 +17,6 @@ export const successResponse = (res: Response, statusCode: number, data: IRespon
   return res.status(statusCode).json({
     status: "success",
     message,
-    responseData,
+    data: responseData,
   });
 };

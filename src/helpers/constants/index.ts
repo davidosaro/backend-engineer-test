@@ -4,6 +4,8 @@ export const RESPONSE_MESSAGES = {
   INTERNAL_SERVER_ERROR: "Internal Server Error",
   DATABASE_CONNECTION_NOT_PROVIDED: "Database connection string not provided",
   ACTIVITY_LOG_CREATED: "Activity log created",
+  ACTIVITIES_FETCHED: "Activity logs fetched",
+  INSUFFICIENT_PERMISSIONS: "You do not possess the required permission(s) to perform this action",
   //... other response messages
 };
 

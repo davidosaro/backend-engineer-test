@@ -1,13 +1,14 @@
 import express from "express";
 import { connectDatabase } from "./config/db";
-import { port } from "./config";
+import { port, apiUrl } from "./config";
 import logger from "./logger";
 import chalk from "chalk";
 import cors from "cors";
 import { successResponse, errorResponse } from "./helpers/response";
-import { HttpStatus, RESPONSE_MESSAGES } from "./helpers/constants/index";
+import { RESPONSE_MESSAGES } from "./helpers/constants/index";
 import errorHandler from "./middlewares/error-handler";
 import { NotFoundError } from "./helpers/errors";
+import ActivityLogRouter from "./modules/activity-log/activity-log.routes";
 
 const app = express();
 
@@ -19,6 +20,9 @@ app.use(cors());
 app.use(express.json());
 
 // ROUTES --------------------------------
+app.use(`${apiUrl}/activity-logs`, ActivityLogRouter);
+
+//
 app.get("/", (req, res) => {
   successResponse(res, 200, {
     message: RESPONSE_MESSAGES.WELCOME,
