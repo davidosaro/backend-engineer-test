@@ -1,0 +1,21 @@
+node_modules
+package-lock.json
+yarn.lock
+.env
+.env.local
+coverage
+/.idea
+
+# Logs
+logs
+*.log
+.rest
+.http
+.DS_Store
+
+push.sh
+
+.github
+sonar-project.properties
+
+.vscode
