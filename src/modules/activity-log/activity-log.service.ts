@@ -9,7 +9,7 @@ export default class ActivityLogService {
   async createActivity(data: Partial<IActivityLogModel>): Promise<IActivityLogModel> {
     return this.activityLogRepository.create(data);
   }
-  async getAllActivities(id: string): Promise<IActivityLogModel[]> {
-    return this.activityLogRepository.find({ ref: id });
+  async getAllActivities(ref: string): Promise<IActivityLogModel[]> {
+    return this.activityLogRepository.find({ ref });
   }
 }

@@ -6,6 +6,11 @@ export const RESPONSE_MESSAGES = {
   ACTIVITY_LOG_CREATED: "Activity log created",
   ACTIVITIES_FETCHED: "Activity logs fetched",
   INSUFFICIENT_PERMISSIONS: "You do not possess the required permission(s) to perform this action",
+  INVALID_CREDENTIALS: "Invalid credentials",
+  USER_NOT_FOUND: "User not found",
+  USER_CREATED: "User created",
+  USER_LOGGED_IN: "User logged in",
+  INVALID_TOKEN: "Invalid token",
   //... other response messages
 };
 

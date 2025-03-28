@@ -1,7 +1,7 @@
 import ActivityLogService from "./activity-log.service";
 import { NextFunction, Request, Response } from "express";
 import { successResponse } from "../../helpers/response";
-import { RESPONSE_MESSAGES } from "../../helpers/constants";
+import { HttpStatus, RESPONSE_MESSAGES } from "../../helpers/constants";
 
 export default class ActivityLogController {
   activityLogService: ActivityLogService;
@@ -12,7 +12,7 @@ export default class ActivityLogController {
   createActivity = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const activityLog = await this.activityLogService.createActivity(req.body);
-      successResponse(res, 201, {
+      successResponse(res, HttpStatus.CREATED, {
         message: RESPONSE_MESSAGES.ACTIVITY_LOG_CREATED,
         data: activityLog,
       });
@@ -23,9 +23,9 @@ export default class ActivityLogController {
 
   getAllActivities = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const { id } = req.params;
-      const activities = await this.activityLogService.getAllActivities(id);
-      successResponse(res, 200, {
+      const { ref } = req.params;
+      const activities = await this.activityLogService.getAllActivities(ref);
+      successResponse(res, HttpStatus.OK, {
         message: RESPONSE_MESSAGES.ACTIVITIES_FETCHED,
         data: activities,
       });

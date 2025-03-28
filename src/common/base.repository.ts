@@ -14,6 +14,9 @@ export default abstract class BaseRepository<T extends Document> {
   async findOne(filter: FilterQuery<T>): Promise<T | null> {
     return this.model.findOne(filter).exec();
   }
+  async findById(id: string): Promise<T | null> {
+    return this.model.findById(id).exec();
+  }
 
   async updateOne(filter: FilterQuery<T>, updateData: UpdateQuery<T>): Promise<any> {
     return this.model.updateOne(filter, updateData, { new: true }).exec();

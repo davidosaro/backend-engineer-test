@@ -3,8 +3,8 @@ import { IResponseData } from "./interfaces";
 import AppError from "./errors/app-error";
 import { RESPONSE_MESSAGES, HttpStatus } from "./constants";
 
-export const errorResponse = (res: Response, err: Partial<AppError>) => {
-  const errorMessage = err.message || RESPONSE_MESSAGES.INTERNAL_SERVER_ERROR;
+export const errorResponse = (res: Response, err: Partial<AppError> | any) => {
+  const errorMessage = err?.message || RESPONSE_MESSAGES.INTERNAL_SERVER_ERROR;
   const errorStatusCode = err?.statusCode || HttpStatus.INTERNAL_SERVER_ERROR;
   return res.status(errorStatusCode).json({
     status: "error",
