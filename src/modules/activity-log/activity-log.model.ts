@@ -1,5 +1,6 @@
 import mongoose, { Schema, Model } from "mongoose";
-import { IActivityLogModel } from "./activity-log.interface";
+import { IActivityLogModel } from "../../helpers/interfaces/index";
+import { trimModel } from "../../helpers";
 
 const ActivityLogSchema: Schema = new mongoose.Schema(
   {
@@ -7,17 +8,8 @@ const ActivityLogSchema: Schema = new mongoose.Schema(
     ref: { type: String },
     action: { type: String, required: true },
   },
-  { timestamps: true }
+  { timestamps: true, toJSON: trimModel() }
 );
-
-ActivityLogSchema.set("toJSON", {
-  transform: (_doc, ret) => {
-    ret.id = ret._id;
-    delete ret._id;
-    delete ret.__v;
-    return ret;
-  },
-});
 
 const ActivityLogModel: Model<IActivityLogModel> = mongoose.model<IActivityLogModel>("ActivityLog", ActivityLogSchema);
 export default ActivityLogModel;

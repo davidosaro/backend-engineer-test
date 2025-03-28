@@ -1,4 +1,4 @@
-import { IActivityLogModel } from "./activity-log.interface";
+import { IActivityLogModel } from "../../helpers/interfaces/index";
 import ActivityLogRepository from "./activity-log.repository";
 
 export default class ActivityLogService {

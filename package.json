@@ -15,6 +15,7 @@
   "devDependencies": {
     "@types/chalk": "^2.2.4",
     "@types/cors": "^2.8.17",
+    "@types/express-validator": "^3.0.2",
     "@types/mongoose": "^5.11.97",
     "@types/node": "^22.13.14",
     "@types/winston": "^2.4.4",
@@ -33,11 +34,14 @@
   },
   "dependencies": {
     "@types/express": "^5.0.1",
+    "bcryptjs": "^3.0.2",
     "chalk": "^4.1.2",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
+    "express-validator": "^7.2.1",
     "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.13.0",
     "winston": "^3.17.0"
   }
