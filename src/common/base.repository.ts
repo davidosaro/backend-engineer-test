@@ -1,4 +1,4 @@
-import { Model, Document, FilterQuery, UpdateQuery } from "mongoose";
+import { Model, Document, FilterQuery, UpdateQuery, UpdateWriteOpResult, DeleteResult } from "mongoose";
 
 export default abstract class BaseRepository<T extends Document> {
   constructor(private readonly model: Model<T>) {}
@@ -18,11 +18,11 @@ export default abstract class BaseRepository<T extends Document> {
     return this.model.findById(id).exec();
   }
 
-  async updateOne(filter: FilterQuery<T>, updateData: UpdateQuery<T>): Promise<any> {
+  async updateOne(filter: FilterQuery<T>, updateData: UpdateQuery<T>): Promise<UpdateWriteOpResult> {
     return this.model.updateOne(filter, updateData, { new: true }).exec();
   }
 
-  async delete(filter: FilterQuery<T>, updateData: UpdateQuery<T>): Promise<any> {
+  async delete(filter: FilterQuery<T>, updateData: UpdateQuery<T>): Promise<DeleteResult> {
     return this.model.deleteOne(filter, updateData);
   }
 }

@@ -1,5 +1,5 @@
 {
-  "name": "backend-engineer-test",
+  "name": "david-osaro-backend-engineer-test",
   "version": "1.0.0",
   "description": "Build a simple RESTful API to create and manage products in a store",
   "main": "index.js",
@@ -16,6 +16,7 @@
     "@types/chalk": "^2.2.4",
     "@types/cors": "^2.8.17",
     "@types/express-validator": "^3.0.2",
+    "@types/jsonwebtoken": "^9.0.9",
     "@types/mongoose": "^5.11.97",
     "@types/node": "^22.13.14",
     "@types/winston": "^2.4.4",
@@ -39,8 +40,10 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
+    "express-joi-validation": "^6.0.0",
     "express-validator": "^7.2.1",
     "helmet": "^8.1.0",
+    "joi": "^17.13.3",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.13.0",
     "winston": "^3.17.0"

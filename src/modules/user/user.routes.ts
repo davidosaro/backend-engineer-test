@@ -1,11 +1,13 @@
 import { Router } from "express";
 import UserController from "./user.controller";
-import { userCreationValidation, loginValidation } from "./user.validator";
+import { userCreationSchema, loginSchema } from "./user.validator";
+import { createValidator } from "express-joi-validation";
 
 const userController = new UserController();
 const router = Router();
+const validator = createValidator({ passError: true });
 
-router.post("/", userCreationValidation, userController.registerUser);
-router.post("/login", loginValidation, userController.loginUser);
+router.post("/", validator.body(userCreationSchema), userController.registerUser);
+router.post("/login", validator.body(loginSchema), userController.loginUser);
 
 export default router;

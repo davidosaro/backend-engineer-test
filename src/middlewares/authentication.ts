@@ -1,14 +1,14 @@
-import { Request, Response, NextFunction } from "express";
+import { Response, NextFunction } from "express";
 import { RESPONSE_MESSAGES } from "../helpers/constants";
 import { ForbiddenError } from "../helpers/errors";
 import { verifyToken } from "../helpers/jwt";
 import { errorResponse } from "../helpers/response";
-import { IUserCredentials } from "../helpers/interfaces";
+import { IUserCredentials, RequestWithAdditions } from "../helpers/interfaces";
 import UserService from "../modules/user/user.service";
 
 const userService = new UserService();
 
-export const authenticateUser = async (req: Request, res: Response, next: NextFunction) => {
+export const authenticateUser = async (req: RequestWithAdditions, res: Response, next: NextFunction) => {
   try {
     const token = req.header("Authorization")?.split(" ")[1] || "";
 

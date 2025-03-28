@@ -21,6 +21,9 @@ export default class UserService {
     const { password = "" } = userObj;
     const hashedPassword = await bcrypt.hash(password, 10);
     const requestBody = { ...userObj, password: hashedPassword };
+
+    // check if username exist
+    // check if email exist
     const user = await this.userRepository.create(requestBody);
     return user;
   }

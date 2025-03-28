@@ -1,5 +1,12 @@
-import { body } from "express-validator";
-import { validateInput } from "../../helpers";
+import Joi from "joi";
 
-export const userCreationValidation = [body("username").notEmpty().isString().withMessage("username is required"), body("email").isEmail().withMessage("email is required"), body("password").notEmpty().isString().withMessage("password is required"), validateInput];
-export const loginValidation = [body("email").isEmail().withMessage("email is required"), body("password").notEmpty().isString().withMessage("password is required"), validateInput];
+export const userCreationSchema = Joi.object({
+  username: Joi.string().trim().required(),
+  email: Joi.string().email().required(),
+  password: Joi.string().trim().required(),
+});
+
+export const loginSchema = Joi.object({
+  email: Joi.string().email().required(),
+  password: Joi.string().trim().required(),
+});
