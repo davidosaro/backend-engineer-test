@@ -8,6 +8,6 @@ const router = Router();
 const validator = createValidator({ passError: true });
 
 router.post("/", validator.body(storeCreationSchema), storeController.createStore);
-router.get("/:id", validator.params(getStoreSchema), storeController.getStoreById);
+// router.get("/:id", validator.params(getStoreSchema), storeController.getStoreById);
 
 export default router;
