@@ -9,6 +9,12 @@ export class InternalServerError extends AppError {
   }
 }
 
+export class ConflictError extends AppError {
+  constructor(message: string) {
+    super(message, HttpStatus.CONFLICT);
+    this.name = "ConflictError";
+  }
+}
 export class UnauthorizedError extends AppError {
   constructor(message: string) {
     super(message, HttpStatus.UNAUTHORIZED);

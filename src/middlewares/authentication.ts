@@ -24,6 +24,6 @@ export const authenticateUser = async (req: RequestWithAdditions, res: Response,
     next();
   } catch (error: any) {
     const err = new ForbiddenError(`${RESPONSE_MESSAGES.INVALID_CREDENTIALS}: ${error.message}`);
-    errorResponse(res, err);
+    next(err);
   }
 };
