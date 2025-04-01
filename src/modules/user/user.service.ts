@@ -5,7 +5,7 @@ import { IUserModel } from "../../helpers/interfaces/index";
 import { generateRefreshToken, generateToken } from "../../helpers/jwt";
 import UserRepository from "./user.repository";
 import bcrypt from "bcryptjs";
-
+import logger from "../../logger";
 export default class UserService {
   userRepository: UserRepository;
   constructor() {
@@ -14,17 +14,25 @@ export default class UserService {
 
   async registerUser(data: Partial<IUserModel>) {
     const { password = "", username = "", email = "" } = data;
+
+    logger.info("Getting user payload...");
     const hashedPassword = await bcrypt.hash(password, 10);
+    logger.info("Hashing password...");
     const requestBody = { ...data, password: hashedPassword };
 
+    logger.info("Checking if username exists...");
     const usernameExists = await this.checkIfUserExists({ username });
     if (usernameExists) {
       throw new BadRequestError(RESPONSE_MESSAGES.USERNAME_EXISTS);
     }
+
+    logger.info("Checking if email exists...");
     const emailExists = await this.checkIfUserExists({ email });
     if (emailExists) {
       throw new BadRequestError(RESPONSE_MESSAGES.EMAIL_EXISTS);
     }
+
+    logger.info("Registering user...");
     const user = await this.userRepository.create(requestBody);
     return user;
   }
