@@ -22,6 +22,8 @@ export default class ProductRepository extends BaseRepository<IProductModel> {
       .skip(offset)
       .limit(limit);
 
-    return getPagination({ rows: products, count: 10 }, page, size);
+    const count = await productModel.countDocuments({ ...filter, ...whereCase });
+
+    return getPagination({ rows: products, count }, page, size);
   }
 }
