@@ -1,30 +1,29 @@
-# Backend Engineer Test
+# Product Management API
 
 Build a simple RESTful API to create and manage products in a store
 
-## Authentication
+## Getting started
 
-Implement token-based authentication
+1. Features
+2. Technologies Stack.
+3. Project Links
 
-## Requirements
+## Features
 
-1. Use NodeJS, Express, Typescript, MongoDB and any other libraries of your choice
-2. All endpoints must be fully documented on Postman
-3. Code must be unit tested
-4. API must be containerized using Docker
+1. User authentication (JWT-based)
+2. Product management (CRUD operations)
+3. Store creation and management
+4. Role based permissions authentication
+5. Input validation with express-validator and Joi
+6. Security enhancements with helmet and cors
+7. Logging with winston and morgan
+8. Unit testing using jest and supertest
+9. Repository pattern
+10. Modularity
 
-## Evaluation Criteria
+## Project Links
 
-1. Database design - scalability and query efficiency
-2. Clean code - redundancy and documentation
-3. Code quality - use of best practices and efficient algorithms
-4. Error handling - Appropriate error codes and messages
-5. Security - Input validation and/or sanitization
-
-## Submission
-
-Reply with the following:
-
-1. Link to Github repository
-2. Link to live API
-3. Link to Postman documentation
+1. Github repo: https://github.com/davidosaro/backend-engineer-test
+2. Live API: https://backend-engineer-test-production.up.railway.app/
+3. Docker image: davidosaro/backend-assessment-docker
+4. Postman collection: https://documenter.getpostman.com/view/32858459/2sB2cREQL3
