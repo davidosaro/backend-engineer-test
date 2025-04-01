@@ -87,7 +87,6 @@ export default class ProductService {
     const whereCase = {} as IGetProducts;
     if (storeId) whereCase["storeId"] = storeId;
 
-    console.log(whereCase, "whereCase");
     return this.productRepository.findAll(whereCase, getPaginationQuery(query));
   }
 
