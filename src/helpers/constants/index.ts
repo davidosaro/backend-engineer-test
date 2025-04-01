@@ -11,6 +11,23 @@ export const RESPONSE_MESSAGES = {
   USER_CREATED: "User created",
   USER_LOGGED_IN: "User logged in",
   INVALID_TOKEN: "Invalid token",
+  USERNAME_EXISTS: "Username already exists",
+  EMAIL_EXISTS: "Email already exists",
+  STORE_CREATED: "Store created successfully",
+  STORE_EXISTS: "Store already exists",
+  STORE_FETCHED: "Store fetched successfully",
+  STORE_NOT_FOUND: "Store not found",
+  PRODUCT_EXISTS: "Product already exists",
+  PRODUCT_NOT_FOUND: "Product not found",
+  PRODUCT_CREATED: "Product created successfully",
+  PRODUCT_UPDATED: "Product updated successfully",
+  PRODUCT_FETCHED: "Product fetched successfully",
+  PRODUCTS_FETCHED: "Products fetched successfully",
+  PRODUCT_DELETED: "Products deleted successfully",
+  PRODUCT_ADDED: "Products added successfully",
+  PRODUCT_REFUNDED: "Product refunded successfully",
+  PRODUCT_INSUFFICIENT: "Product Quantity Insufficient",
+  PRODUCT_PURCHASED: "Product Purchased successfully",
   //... other response messages
 };
 
@@ -63,4 +80,9 @@ export const HttpStatus = {
   SERVICE_UNAVAILABLE: 503,
   GATEWAY_TIMEOUT: 504,
   HTTP_VERSION_NOT_SUPPORTED: 505,
+};
+
+export const PAGINATION_OPTIONS = {
+  page: 1,
+  size: 10,
 };
