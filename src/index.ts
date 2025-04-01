@@ -16,6 +16,7 @@ import authorization from "./middlewares/authorization";
 import UserRouter from "./modules/user/user.routes";
 import StoreRouter from "./modules/store/store.routes";
 import ProductRouter from "./modules/product/product.routes";
+import morganMiddleware from "./middlewares/morgan";
 
 const app = express();
 
@@ -25,6 +26,7 @@ connectDatabase();
 // MIDDLEWARES --------------------------------
 app.use(cors());
 app.use(express.json());
+app.use(morganMiddleware);
 
 // HOME OR HEALTH ROUTES --------------------------------
 app.get("/", (req, res) => {
