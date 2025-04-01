@@ -8,9 +8,14 @@ import { successResponse, errorResponse } from "./helpers/response";
 import { RESPONSE_MESSAGES } from "./helpers/constants/index";
 import errorHandler from "./middlewares/error-handler";
 import { NotFoundError } from "./helpers/errors";
-import ActivityLogRouter from "./modules/activity-log/activity-log.routes";
 import { authenticateUser } from "./middlewares/authentication";
+import { Role } from "./helpers/enums";
+import authorization from "./middlewares/authorization";
+
+// ROUTERS
 import UserRouter from "./modules/user/user.routes";
+import StoreRouter from "./modules/store/store.routes";
+import ProductRouter from "./modules/product/product.routes";
 
 const app = express();
 
@@ -33,9 +38,10 @@ app.use(`${apiUrl}/users`, UserRouter);
 app.use(authenticateUser);
 
 // ROUTES --------------------------------
-app.use(`${apiUrl}/activity-logs`, ActivityLogRouter);
+app.use(`${apiUrl}/stores`, authorization([Role.ADMIN]), StoreRouter);
+app.use(`${apiUrl}/products`, ProductRouter);
 
-// HANDLE ERROR RESPONSE --------------------------------
+// ERROR HANDLING --------------------------------
 app.use(errorHandler);
 
 // UNKNOWN ROUTE ----------------------------------------------------------------
