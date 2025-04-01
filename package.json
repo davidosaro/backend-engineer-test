@@ -10,9 +10,6 @@
     "build": "tsc",
     "test": "jest"
   },
-  "engines": {
-    "node": "14.x"
-  },
   "keywords": [],
   "author": "David Osaro",
   "license": "ISC",
