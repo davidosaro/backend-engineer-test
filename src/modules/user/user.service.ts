@@ -1,5 +1,6 @@
+import { FilterQuery } from "mongoose";
 import { RESPONSE_MESSAGES } from "../../helpers/constants";
-import { ForbiddenError, NotFoundError } from "../../helpers/errors";
+import { BadRequestError, ForbiddenError, NotFoundError } from "../../helpers/errors";
 import { IUserModel } from "../../helpers/interfaces/index";
 import { generateRefreshToken, generateToken } from "../../helpers/jwt";
 import UserRepository from "./user.repository";
@@ -11,25 +12,25 @@ export default class UserService {
     this.userRepository = new UserRepository();
   }
 
-  async validateUser(id: string) {
-    const user = await this.userRepository.findById(id);
-    if (!user) throw new NotFoundError(RESPONSE_MESSAGES.USER_NOT_FOUND);
-    return user;
-  }
-
-  async registerUser(userObj: Partial<IUserModel>) {
-    const { password = "" } = userObj;
+  async registerUser(data: Partial<IUserModel>) {
+    const { password = "", username = "", email = "" } = data;
     const hashedPassword = await bcrypt.hash(password, 10);
-    const requestBody = { ...userObj, password: hashedPassword };
+    const requestBody = { ...data, password: hashedPassword };
 
-    // check if username exist
-    // check if email exist
+    const usernameExists = await this.checkIfUserExists({ username });
+    if (usernameExists) {
+      throw new BadRequestError(RESPONSE_MESSAGES.USERNAME_EXISTS);
+    }
+    const emailExists = await this.checkIfUserExists({ email });
+    if (emailExists) {
+      throw new BadRequestError(RESPONSE_MESSAGES.EMAIL_EXISTS);
+    }
     const user = await this.userRepository.create(requestBody);
     return user;
   }
 
-  async loginUser(userObj: Partial<IUserModel>) {
-    const { email, password = "" } = userObj;
+  async loginUser(data: Partial<IUserModel>) {
+    const { email, password = "" } = data;
 
     const user = await this.userRepository.findOne({ email });
     if (!user || !(await bcrypt.compare(password, user.password))) throw new ForbiddenError(RESPONSE_MESSAGES.INVALID_CREDENTIALS);
@@ -42,5 +43,16 @@ export default class UserService {
       access: accessToken,
       refresh: refreshToken,
     };
+  }
+
+  async validateUser(id: string) {
+    const user = await this.userRepository.findById(id);
+    if (!user) throw new NotFoundError(RESPONSE_MESSAGES.USER_NOT_FOUND);
+    return user;
+  }
+
+  async checkIfUserExists(args: FilterQuery<IUserModel>) {
+    const user = await this.userRepository.findOne(args);
+    return !!user;
   }
 }
