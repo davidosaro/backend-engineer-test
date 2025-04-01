@@ -9,5 +9,5 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["api", "jest.config.ts"]
+  "include": ["src", "jest.config.ts"]
 }
