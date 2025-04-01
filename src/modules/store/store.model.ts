@@ -7,7 +7,6 @@ const StoreSchema: Schema = new mongoose.Schema(
     description: { type: String },
     logo: { type: String },
     address: { type: String },
-    products: [{ type: mongoose.Schema.Types.ObjectId, ref: "Products" }],
     ownerId: { type: String },
     createdBy: { type: String },
   },

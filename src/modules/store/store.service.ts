@@ -3,6 +3,7 @@ import { IStoreModel, IUserModel } from "../../helpers/interfaces";
 import StoreRepository from "./store.repository";
 import { RESPONSE_MESSAGES } from "../../helpers/constants";
 import UserService from "../user/user.service";
+import { ConflictError, NotFoundError } from "../../helpers/errors";
 
 export default class StoreService {
   storeRepository: StoreRepository;
@@ -15,9 +16,9 @@ export default class StoreService {
 
   async createStore(data: Partial<IStoreModel>, user: Partial<IUserModel> = {}): Promise<IStoreModel> {
     const { name } = data;
-    const { username, _id = "" } = user;
+    const { username = "", _id = "" } = user;
     const storeExists = await this.checkIfStoreExists({ name });
-    if (storeExists) throw new Error(RESPONSE_MESSAGES.STORE_EXISTS);
+    if (storeExists) throw new ConflictError(RESPONSE_MESSAGES.STORE_EXISTS);
 
     await this.userService.validateUser(_id);
     return this.storeRepository.create({ ...data, createdBy: username, ownerId: _id });
@@ -25,7 +26,7 @@ export default class StoreService {
 
   async getStoreById(id: string): Promise<IStoreModel | null> {
     const store = await this.storeRepository.findById(id);
-    if (!store) throw new Error(RESPONSE_MESSAGES.STORE_NOT_FOUND);
+    if (!store) throw new NotFoundError(RESPONSE_MESSAGES.STORE_NOT_FOUND);
     return store;
   }
   async checkIfStoreExists(args: FilterQuery<IStoreModel>) {

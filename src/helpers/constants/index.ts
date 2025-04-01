@@ -25,10 +25,9 @@ export const RESPONSE_MESSAGES = {
   PRODUCTS_FETCHED: "Products fetched successfully",
   PRODUCT_DELETED: "Products deleted successfully",
   PRODUCT_ADDED: "Products added successfully",
-  PRODUCT_REFUNDED: "Product refunded successfully",
+  PRODUCT_REFUNDED: "Product returned successfully",
   PRODUCT_INSUFFICIENT: "Product Quantity Insufficient",
   PRODUCT_PURCHASED: "Product Purchased successfully",
-  //... other response messages
 };
 
 export const HttpStatus = {

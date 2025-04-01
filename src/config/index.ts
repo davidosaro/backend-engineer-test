@@ -1,6 +1,12 @@
 import dotenv from "dotenv";
 dotenv.config();
 
-const { MONGODB_URI: databaseConnectionString = "", PORT: port = 3000, API_URL: apiUrl = "api/v1", ACCESS_TOKEN: accessKey = "", REFRESH_TOKEN: refreshKey = "" } = process.env;
+const { MONGODB_URI, PORT, API_URL, ACCESS_TOKEN, REFRESH_TOKEN } = process.env;
 
-export { databaseConnectionString, port, apiUrl, accessKey, refreshKey };
+export const { databaseConnectionString, port, apiUrl, accessKey, refreshKey } = {
+  databaseConnectionString: MONGODB_URI || "",
+  port: Number(PORT) || 3000,
+  apiUrl: API_URL || "api/v1",
+  accessKey: ACCESS_TOKEN || "",
+  refreshKey: REFRESH_TOKEN || "",
+};

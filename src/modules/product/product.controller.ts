@@ -13,7 +13,7 @@ export default class ProductController {
 
   createProduct = async (req: RequestWithAdditions, res: Response, next: NextFunction) => {
     try {
-      const product = await this.productService.createProduct(req.body);
+      const product = await this.productService.createProduct(req.body, req.user);
       successResponse(res, HttpStatus.CREATED, {
         message: RESPONSE_MESSAGES.PRODUCT_CREATED,
         data: product,
@@ -113,6 +113,5 @@ export default class ProductController {
     }
   };
 
-  // ... add more endpoints like bulk operations, document upload?
-  // add activity logs
+  // ... add more endpoints like bulk operations?
 }

@@ -1,6 +1,6 @@
 import { PAGINATION_OPTIONS } from "./constants";
 import { IProductSearchKey } from "./enums";
-import { IGetProducts, IGetProductsWhereCase } from "./interfaces";
+import { IGetProducts, IGetProductsWhereCase, IPaginationResponse } from "./interfaces";
 
 export const trimModel = () => ({
   transform: (_doc: unknown, ret: Record<string, unknown>) => {
@@ -19,7 +19,7 @@ export const getLimitAndOffset = (page: string = "", size: string = "") => {
   return { limit, offset };
 };
 
-export const getPagination = (data: any, page: string, size: string) => {
+export const getPagination = (data: any, page: string, size: string): IPaginationResponse => {
   if (!data) {
     return { totalItems: 0, totalPages: 0, currentPage: 0, records: [] };
   }
@@ -40,7 +40,9 @@ export const getSearchWhereCase = (queryObj: IGetProducts, args = {}) => {
   const { searchKey, searchValue, status } = queryObj;
 
   const whereCase = { isDeleted: false } as IGetProductsWhereCase;
-  if (searchKey && searchValue) whereCase[searchKey] = searchValue;
+  if (searchKey && searchValue) {
+    whereCase[searchKey] = searchValue;
+  }
   if (status) whereCase["status"] = status;
 
   return { ...whereCase, ...args };
@@ -52,6 +54,8 @@ export const getPaginationQuery = (queryObj: IGetProducts, args: any = {}) => {
   const whereCase = getSearchWhereCase(queryObj, args);
 
   return {
+    page,
+    size,
     limit,
     offset,
     whereCase,

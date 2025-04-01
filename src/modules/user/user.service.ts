@@ -1,6 +1,6 @@
 import { FilterQuery } from "mongoose";
 import { RESPONSE_MESSAGES } from "../../helpers/constants";
-import { BadRequestError, ForbiddenError, NotFoundError } from "../../helpers/errors";
+import { BadRequestError, NotFoundError, UnauthorizedError } from "../../helpers/errors";
 import { IUserModel } from "../../helpers/interfaces/index";
 import { generateRefreshToken, generateToken } from "../../helpers/jwt";
 import UserRepository from "./user.repository";
@@ -33,7 +33,7 @@ export default class UserService {
     const { email, password = "" } = data;
 
     const user = await this.userRepository.findOne({ email });
-    if (!user || !(await bcrypt.compare(password, user.password))) throw new ForbiddenError(RESPONSE_MESSAGES.INVALID_CREDENTIALS);
+    if (!user || !(await bcrypt.compare(password, user.password))) throw new UnauthorizedError(RESPONSE_MESSAGES.INVALID_CREDENTIALS);
 
     const { id = "", role = "" } = user;
     const accessToken = generateToken({ id, role });

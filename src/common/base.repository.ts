@@ -1,6 +1,6 @@
 import { Model, Document, FilterQuery, UpdateQuery, UpdateWriteOpResult, DeleteResult } from "mongoose";
 
-export default abstract class BaseRepository<T extends Document> {
+export default class BaseRepository<T extends Document> {
   constructor(private readonly model: Model<T>) {}
 
   async create(data: Partial<T>): Promise<T> {
@@ -12,17 +12,17 @@ export default abstract class BaseRepository<T extends Document> {
   }
 
   async findOne(filter: FilterQuery<T>): Promise<T | null> {
-    return this.model.findOne(filter).exec();
+    return this.model.findOne(filter);
   }
   async findById(id: string): Promise<T | null> {
-    return this.model.findById(id).exec();
+    return this.model.findById(id);
   }
 
   async updateOne(filter: FilterQuery<T>, updateData: UpdateQuery<T>): Promise<UpdateWriteOpResult> {
-    return this.model.updateOne(filter, updateData, { new: true }).exec();
+    return this.model.updateOne(filter, updateData, { new: true });
   }
 
-  async delete(filter: FilterQuery<T>, updateData: UpdateQuery<T>): Promise<DeleteResult> {
-    return this.model.deleteOne(filter, updateData);
+  async delete(filter: FilterQuery<T>): Promise<DeleteResult> {
+    return this.model.deleteOne(filter);
   }
 }

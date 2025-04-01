@@ -13,8 +13,7 @@ export default class StoreController {
 
   createStore = async (req: RequestWithAdditions, res: Response, next: NextFunction) => {
     try {
-      const loggedInUser = req.user;
-      const store = await this.storeService.createStore(req.body, loggedInUser);
+      const store = await this.storeService.createStore(req.body, req.user);
       successResponse(res, HttpStatus.CREATED, {
         message: RESPONSE_MESSAGES.STORE_CREATED,
         data: store,
@@ -35,7 +34,4 @@ export default class StoreController {
       next(err);
     }
   };
-  // updateStore = async (req: Request, res: Response, next: NextFunction) => {}
-  // deleteStore = async (req: Request, res: Response, next: NextFunction) => {}
-  // Implement other methods here...
 }

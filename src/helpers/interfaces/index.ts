@@ -41,6 +41,7 @@ export interface IProductModel extends Document {
   quantityReturned?: number;
   quantitySold?: number;
   createdBy?: string;
+  isDeleted?: boolean;
 }
 
 export interface IGetProducts {
@@ -79,7 +80,16 @@ export interface IGetProductsWhereCase {
 }
 
 export interface IPaginationQuery {
-  limit: number;
-  offset: number;
-  whereCase: IGetProductsWhereCase;
+  limit?: number;
+  offset?: number;
+  whereCase?: IGetProductsWhereCase;
+  page?: string;
+  size?: string;
+}
+
+export interface IPaginationResponse {
+  totalItems: number;
+  records: IProductModel[];
+  totalPages: number;
+  currentPage: number;
 }

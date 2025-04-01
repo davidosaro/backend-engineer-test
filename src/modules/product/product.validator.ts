@@ -1,5 +1,5 @@
 import Joi from "joi";
-import { ProductReturnType } from "../../helpers/enums";
+import { IProductSearchKey, ProductReturnType, ProductStatus } from "../../helpers/enums";
 
 export const productCreationSchema = Joi.object({
   name: Joi.string().trim().required(),
@@ -18,10 +18,14 @@ export const getProductSchema = Joi.object({
 export const getProductsSchema = Joi.object({
   page: Joi.string().trim(),
   size: Joi.string().trim(),
-  storeId: Joi.string().hex().length(24).trim().required(),
-  status: Joi.string().trim(),
+  storeId: Joi.string().hex().length(24).trim(),
+  status: Joi.string()
+    .valid(...Object.values(ProductStatus))
+    .trim(),
   searchValue: Joi.string().trim(),
-  searchKey: Joi.string().trim(),
+  searchKey: Joi.string()
+    .valid(...Object.values(IProductSearchKey))
+    .trim(),
   sort: Joi.string().trim(),
 });
 

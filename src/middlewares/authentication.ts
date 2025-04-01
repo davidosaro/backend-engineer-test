@@ -1,8 +1,7 @@
 import { Response, NextFunction } from "express";
 import { RESPONSE_MESSAGES } from "../helpers/constants";
-import { ForbiddenError } from "../helpers/errors";
+import { UnauthorizedError } from "../helpers/errors";
 import { verifyToken } from "../helpers/jwt";
-import { errorResponse } from "../helpers/response";
 import { IUserCredentials, RequestWithAdditions } from "../helpers/interfaces";
 import UserService from "../modules/user/user.service";
 
@@ -13,9 +12,8 @@ export const authenticateUser = async (req: RequestWithAdditions, res: Response,
     const token = req.header("Authorization")?.split(" ")[1] || "";
 
     if (!token) {
-      throw new ForbiddenError(RESPONSE_MESSAGES.INVALID_TOKEN);
+      throw new UnauthorizedError(RESPONSE_MESSAGES.INVALID_TOKEN);
     }
-    // token validity check
     const decodedData = await verifyToken(token);
     const { id } = decodedData as IUserCredentials;
 
@@ -23,7 +21,7 @@ export const authenticateUser = async (req: RequestWithAdditions, res: Response,
     req.user = user;
     next();
   } catch (error: any) {
-    const err = new ForbiddenError(`${RESPONSE_MESSAGES.INVALID_CREDENTIALS}: ${error.message}`);
+    const err = new UnauthorizedError(`${RESPONSE_MESSAGES.INVALID_CREDENTIALS}: ${error.message}`);
     next(err);
   }
 };

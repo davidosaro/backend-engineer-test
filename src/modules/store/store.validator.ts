@@ -5,7 +5,6 @@ export const storeCreationSchema = Joi.object({
   description: Joi.string().trim(),
   logo: Joi.string().trim(),
   address: Joi.string().trim(),
-  ownerId: Joi.string().hex().length(24),
 });
 
 export const getStoreSchema = Joi.object({
