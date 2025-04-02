@@ -18,6 +18,7 @@ Build a simple RESTful API to create and manage products in a store
 7. Unit testing using jest and supertest
 8. Repository pattern
 9. Modularity
+10. Dockerization
 
 ## Project Links
 
